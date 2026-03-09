@@ -1,0 +1,70 @@
+As a **Quality Engineer**, I have analyzed the **Basic Shopping Cart** application (v1.0) and developed the following test strategy and plan. This plan focuses on risk-based prioritization and systematic edge-case detection to ensure the integrity of the checkout flow and server-side state management.
+
+---
+
+# 📋 Test Strategy: Basic Shopping Cart Application
+
+## 1. Requirement & Risk Analysis
+
+The application is a stateful multi-page shopping cart with a supporting REST API.
+
+* **Critical Path:** Product selection → Cart management → Checkout submission → Order confirmation.
+* **High-Risk Areas:**
+* **State Synchronization:** Discrepancies between local browser storage (session) and server-side order state.
+* **Pagination Logic:** Data integrity when navigating between pages (`?page=1&limit=10`) or altering limit parameters.
+* **Session Persistence:** Behavior of "Open" orders versus "Accepted" orders during session timeouts or browser restarts.
+* **API vs. UI Parity:** Ensuring the REST API handles the same validation logic as the frontend.
+
+
+
+## 2. Test Plan: Comprehensive Scenarios
+
+### A. Functional & Happy Path (Priority: High)
+
+* **Navigation & Pagination:** Verify that `limit=10` displays exactly 10 items and navigation buttons correctly increment/decrement the `page` parameter.
+* **Cart Lifecycle:** Add items from the **Product List**, navigate to the **Cart Page**, adjust quantities, and verify the total price refreshes dynamically.
+* **Order Completion:** Progress through the checkout flow and verify that the order status transitions from `Open` to `Accepted` on the **User Page**.
+
+### B. Edge Case & Boundary Analysis (Priority: High)
+
+* **Quantity Boundaries:** - Input `0` or negative values in the cart quantity field.
+* Input extremely large numbers (overflow testing) to check total price calculation.
+
+
+* **Pagination Limits:** - Change `limit` to `0`, `1`, or a value exceeding the total product count (e.g., `limit=1000`).
+* Navigate to a non-existent page (e.g., `page=999`).
+
+
+* **Empty States:** Access the Cart Page and Checkout Flow with zero items added.
+
+### C. Negative & Security Testing (Priority: Medium)
+
+* **URL Manipulation:** Manually edit the `page` or `limit` parameters in the URL to non-numeric strings or SQL injection patterns (e.g., `limit=1; DROP TABLE products`).
+* **Concurrent Sessions:** Attempt to modify the cart in two different tabs and check if the server-side state remains consistent.
+* **Order Deletion:** Attempt to delete an `Accepted` order vs. an `Open` order via direct API calls (bypassing UI restrictions).
+
+### D. API Integration (Priority: Medium)
+
+* **OpenAPI Validation:** Use the Swagger UI to send `POST` requests for orders with missing mandatory fields.
+* **Data Integrity:** Verify that a product added via the API appears correctly in the Web UI cart session.
+
+---
+
+## 3. Prioritized Deliverables
+
+### Test Case Documentation (Sample)
+
+| TC_ID | Scenario | Input / Action | Expected Result | Risk Level |
+| --- | --- | --- | --- | --- |
+| **CART_01** | Zero Quantity | Set item quantity to `0` in Cart. | Item is removed or quantity remains at min (1); no negative totals. | High |
+| **PAG_01** | Limit Boundary | Set `limit=1` in URL. | UI displays exactly one product with correct navigation. | Medium |
+| **ORD_01** | State Change | Confirm order in Checkout. | Order status changes to `Accepted`; cannot be deleted by user. | High |
+| **SEC_01** | Param Injection | `limit=invalid_string` | System handles error gracefully (defaults to 10 or shows 400 error). | Medium |
+
+---
+
+## 4. Execution Guidance
+
+1. **Early Prevention:** Validate the OpenAPI spec before UI automation to ensure backend constraints are robust.
+2. **Tooling:** Use **Selenium/Playwright** for UI-based pagination testing and **Postman/Bruno** for state-based API testing.
+3. **Clean Slate:** Ensure the "rolling data clear" (200+ users) does not interfere with long-running automation scripts by implementing setup/teardown data factories.
