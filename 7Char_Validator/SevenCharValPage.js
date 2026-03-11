@@ -1,1 +1,55 @@
-const {Builder, until, Key, By} = require(\"selenium-webdriver\");\nrequire(\"chromedriver\");\n\nclass SevenCharValPage {\n    constructor(url = \"https://testpages.eviltester.com/apps/7-char-val/\") {\n        this.driver = null;\n        this.url = url;\n        this.charactersInput = \"//*[@name='characters']\";\n        this.checkButton = \"//*[@value='Check Input']\";\n        this.validationMessage = \"//*[@name='validation_message']\";\n    }\n\n    async open() {\n        this.driver = await new Builder().forBrowser('chrome').build();\n        await this.driver.get(this.url);\n        console.log(this.url);\n    }\n\n    async enterCharacters(chars) {\n        const input = await this.driver.findElement(By.xpath(this.charactersInput));\n        await input.clear();\n        await input.sendKeys(chars);\n    }\n\n    async clickCheckInput() {\n        await this.driver.findElement(By.xpath(this.checkButton)).click();\n    }\n\n    async checkValue(chars) {\n        await this.enterCharacters(chars);\n        await this.clickCheckInput();\n        await this.driver.sleep(100);\n    }\n\n    async getValidationMessage() {\n        const msgInput = await this.driver.findElement(By.xpath(this.validationMessage));\n        return await msgInput.getAttribute(\"value\");\n    }\n\n    async getTitle() {\n        return await this.driver.getTitle();\n    }\n\n    async sleep(n) {\n        await this.driver.sleep(n);\n    }\n\n    async close() {\n        if (this.driver) {\n            await this.driver.quit();\n        }\n    }\n}\n\nmodule.exports = SevenCharValPage;
+const {Builder, until, Key, By} = require("selenium-webdriver");
+require("chromedriver");
+
+class SevenCharValPage {
+    constructor(url = "https://testpages.eviltester.com/apps/7-char-val/") {
+        this.driver = null;
+        this.url = url;
+        this.charactersInput = "//*[@name='characters']";
+        this.checkButton = "//*[@value='Check Input']";
+        this.validationMessage = "//*[@name='validation_message']";
+    }
+
+    async open() {
+        this.driver = await new Builder().forBrowser('chrome').build();
+        await this.driver.get(this.url);
+        console.log(this.url);
+    }
+
+    async enterCharacters(chars) {
+        const input = await this.driver.findElement(By.xpath(this.charactersInput));
+        await input.clear();
+        await input.sendKeys(chars);
+    }
+
+    async clickCheckInput() {
+        await this.driver.findElement(By.xpath(this.checkButton)).click();
+    }
+
+    async checkValue(chars) {
+        await this.enterCharacters(chars);
+        await this.clickCheckInput();
+        await this.driver.sleep(100);
+    }
+
+    async getValidationMessage() {
+        const msgInput = await this.driver.findElement(By.xpath(this.validationMessage));
+        return await msgInput.getAttribute("value");
+    }
+
+    async getTitle() {
+        return await this.driver.getTitle();
+    }
+
+    async sleep(n) {
+        await this.driver.sleep(n);
+    }
+
+    async close() {
+        if (this.driver) {
+            await this.driver.quit();
+        }
+    }
+}
+
+module.exports = SevenCharValPage;
