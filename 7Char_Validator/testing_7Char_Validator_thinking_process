@@ -1,0 +1,131 @@
+Defining Test Cases
+
+I'm currently focused on defining a comprehensive suite of test cases for the 7-character validation micro web app. My process involves dissecting the app's functionality, which centers on validating input as exactly seven characters. I'm exploring potential edge cases, including invalid character sets, lengths outside the target, and different input types. I'm thinking of focusing on a strong positive, and then build from there.
+
+Analyzing Input Requirements
+
+I've examined the page content and have a clearer picture of the validation constraints. It requires a seven-character input consisting only of uppercase and lowercase letters, numbers, and asterisks. The focus is on implementing a JavaScript-based validation for this specific character set.
+
+Defining Test Cases
+
+I'm now detailing the test cases I described. Boundary value analysis for length is my starting point: I'm validating valid and invalid lengths (too short/too long). Also, I will perform equivalence partitioning on valid and invalid inputs, focusing on length and character sets. I will also incorporate UI/interaction tests, security checks and edge cases to ensure robust validation.
+
+Expanding Test Suites
+
+I'm expanding the test suites. I'm focusing on invalid lengths, and character set validation using equivalence partitioning, covering various invalid character types such as spaces, special characters, unicode, and invisible characters. I'm also preparing to test input field behavior and interaction to ensure a robust validation suite.
+
+Testing Edge Cases
+
+I'm now focusing on specific edge cases. Testing copy-pasted inputs of both valid and invalid length, and inputs with leading/trailing spaces, has revealed that spaces are invalid. I am now exploring scenarios such as backspace after valid input, and replacing an existing input with new text, in order to test dynamic updates. Also I'm preparing to look at UI/UX, real-time validation, and initial state and form submission behavior with these edge cases.
+
+Structuring Test Cases
+
+I'm structuring the test cases with categories like positive/negative cases for length and characters, plus interaction/UI tests. I'm considering both real-time validation and a submit button interaction. Positive cases include all valid character sets. Negative cases cover invalid lengths, and the invalid characters. I'm also planning security and edge-case tests, such as XSS, and Unicode input.
+
+Expanding Negative Cases
+
+I'm now expanding the negative character test cases further. I will test inputs of invalid length: 6 characters and 8 characters, as well as an extremely long input. I'm also planning to test a wide range of invalid character types and combinations, to make sure the validation covers spaces, punctuation, math symbols, and non-Latin/accented characters. Additionally, I'll incorporate emojis and invisible characters like tabs. I'll include copy-paste interactions and UI behavior, to ensure a comprehensive test suite.
+
+Refining Submission Logic
+
+I'm now focusing on form submission scenarios. I am testing the behavior of the form when the input is valid versus invalid, particularly focusing on the "Enter" key press. Furthermore, I've got to ensure the validation logic triggers on blur or on form submit. I want to make sure it handles these events properly to provide a smooth user experience.
+
+I'm now also focusing on security and edge cases, testing XSS payloads and SQL injection payloads of 7 characters to verify the validation rejects malicious inputs. Null byte injection is being considered too.
+
+Defining Positive Inputs
+
+I'm now detailing positive test cases for the character set. I'll test strings of exactly 7 valid characters including all lowercase letters, all numbers, and all asterisks. I will combine each of these character types together, to create mixed strings containing a combination of uppercase, lowercase letters, numbers, and asterisks.
+
+Expanding Negative Cases
+
+I'm now detailing negative cases for the character set, which are an expansion on earlier test suites. Testing will include inputs with spaces (TC11, TC12) both internal and leading/trailing. I'll test special characters (@, #, $, etc., TC13), punctuation marks (.,;, TC14), and math/logic symbols (+, -, etc., TC15) and accented/non-Latin characters. Also, I'm testing inputs that contain a mix of invalid characters. Finally I'm making a case for an extremely long input (TC10), to verify validation limits.
+
+Testing Special Characters
+
+I'm now detailing test cases for unicode and special characters. Specifically, I'm verifying the validation logic handles inputs that include accented characters like ü, ñ, and ß. I'm also confirming emoji characters like 😊 are invalid. In addition to this, I'm testing invisible characters, such as tabs and newlines, to ensure they're rejected as invalid too.
+
+\n\n
+
+I'm also delving into UI/UX elements. I'm starting interaction tests, confirming copy/paste works for both valid and invalid input. I'm verifying real-time validation by testing backspace and character typing to update validation messages correctly, with a focus on usability.
+
+Testing Form Submission
+
+I'm now detailing test cases for the Enter key. I am checking what happens when the form is submitted on both valid and invalid input. For invalid input, I want to ensure the form doesn't submit. I'm also preparing to test security with HTML/JS payloads and SQL injection attempts to confirm they are invalid inputs.
+
+Gaining Context and Scope
+
+I'm now understanding the form's basic structure: an input field, a validation button, and a result display. This aligns with the 7CharVal example, which uses entry and validation message fields. This gives me a clearer scope to work with.
+
+Defining UI Elements
+
+I've specified the UI: an input field named "characters," a "Check Input" button, and a non-editable validation message field. This impacts my test cases. I'm expanding my test categories to include UI & Usability, Security & Injection, and Exploratory tests. I now have a clearer plan for detailed test case creation.
+
+Formulating Test Cases
+
+I've crafted five positive test cases, validating inputs with seven uppercase/lowercase letters, numbers, asterisks, and mixed characters. Then, I devised four negative cases for empty, six-character, and eight-character inputs. These negative tests will assess the length constraints. Further negative test cases are planned.
+
+Expanding Negative Tests
+
+I've added several new negative test cases to confirm character constraints. These focus on scenarios with spaces, disallowed special characters, punctuation, math symbols, accented characters, emojis, and invisible characters, all within the seven-character limit. Additionally, I've created TC10 to deal with extremely long strings.
+
+Testing UI Functionality
+
+I'm now focusing on UI and Usability. I've defined new test cases to check the editability of the validation field (TC18). I will verify that the Enter key triggers validation (TC19). I'll also confirm that the validation message updates correctly with changing input (TC20). Leading/trailing spaces will also be assessed (TC21). Copy and paste functionality will be checked (TC22).
+
+Confirming UI Elements
+
+I've got good news! The search results nailed the UI elements. Specifically, the input field is called characters, the button is either validate or has the value "Check Input," and the validation message appears in a field named validation. This provides a very concrete starting point.
+
+Drafting Test Cases
+
+I've outlined the test case structure. I'm focusing on functional cases first, both positive and negative, including boundary and equivalence partitioning. I'm thinking about exploratory testing, especially given the deliberate bugs and obfuscated JavaScript, and planning UI, usability, security, and DOM manipulation tests.
+
+Defining Positive Test Cases
+
+I've just finished specifying positive functional test cases. I'm confident about these. Specifically, I've outlined scenarios for seven uppercase, lowercase, numbers, asterisks, and mixed character strings. I anticipate a "Valid Value" response in all of these situations. This feels like a solid foundation.
+
+Expanding Negative Test Cases
+
+I'm now detailing negative functional test cases focused on character inputs. I'm targeting scenarios with spaces, disallowed special characters, punctuation, math symbols, accented/non-Latin letters, emojis, and invisible characters, all within the 7-character limit. Additionally, I'm verifying the input, with each case expecting an "Invalid Value" response. I'm also planning to test a very long input string.
+
+Developing UI Tests
+
+I'm deep in UI and usability testing now. I've designed test cases to ensure the validation message field is uneditable and that the system responds correctly to Enter key presses and dynamic input changes. I'm also confirming the system trims leading/trailing spaces and handles copy-pasted input correctly.
+
+Formulating Security Tests
+
+I'm now deep into security testing. I've got three new cases I'm pretty excited about. First, I will see what happens when the maxlength is DOM-manipulated to permit longer input. Second, I'm testing the form's resilience with JavaScript disabled. Finally, I'll be seeing how the application handles rapid, repeated submissions.
+
+I've also designed a suite of security test cases, now, to guard against potential injection vulnerabilities. I'll be probing for XSS with HTML/JS payloads, SQL Injection attempts, and null byte injection scenarios, expecting "Invalid Value" responses each time to mitigate any security risks.
+
+Confirming The Hypothesis
+
+I've confirmed my initial hypothesis. Search results clearly point towards the app being deliberately buggy for exploratory testing, JavaScript hacking, and automation practice. Alan Richardson (EvilTester) is the creator and wrote a 20.
+
+Defining Test Cases
+
+I've finalized the test case structure. My response will be comprehensive, encompassing Functional, BVA, EP, UI, Exploratory/Technical (DOM & JS Hacking), Security, and Automation testing. I'm starting to define Functional Testing cases, and I have already outlined several positive test cases. I am now working on negative test cases with a focus on Boundary Value Analysis.
+
+Expanding Negative Test Cases
+
+I'm deep into expanding my negative functional test cases, now focusing on specific character constraints using equivalence partitioning. I've documented various tests, including those with spaces, special symbols, punctuation, accented characters, emojis, and invisible characters, ensuring thoroughness. I have also added a UI test case that verifies the validation_message is not editable.
+
+Developing Technical Scenarios
+
+I'm now focusing on exploratory and technical test cases. I'm examining scenarios such as removing the readonly attribute from the validation_message field in the DOM to see if it can be manually edited, and if the app overrides the user-input. I will also check the manipulation of maxlength and the name or id attributes to see how it affects the app. I have started writing the related test cases.
+
+Confirming Design Intent
+
+I've confirmed through search results that the app's design intentionally incorporates "deliberate bugs," making it ideal for exploratory testing, JavaScript manipulation, and automation practice. The creator, Alan Richardson (EvilTester), authored a helpful guide further clarifying the app's purpose. This reinforces the app's deliberate pedagogical approach.
+
+Expanding Test Strategy
+
+I'm now expanding my testing strategy, recognizing the ebook's depth. My approach will evolve beyond basic functional tests. I will be including Exploratory, technical, and "hacking" test cases. My test cases will be structured to cover Functional, BVA, EP, UI, Exploratory, DOM/JS, Security and Automation testing. Functional tests will begin to cover various scenarios, including valid inputs and boundary value analysis.
+
+Refining Test Coverage
+
+I'm refining my negative functional tests, focusing on character constraints. I've defined new test cases to check for invalid inputs regarding spaces, special symbols, punctuation, accented characters, emojis, and invisible characters, ensuring inputs are rejected. I am also planning on adding UI test cases. I am also investigating a readonly/disabled state on the validation_message field.
+
+Expanding Technical Testing
+
+I'm now focusing on exploratory and technical tests related to the DOM and JavaScript. I've designed test cases to examine the validation_message field by manipulating its readonly and disabled attributes. I'll also modify the maxlength attribute, test name/ID changes, and assess JavaScript's impact by disabling it. I plan to check for graceful failure, and test error handling using the browser console.
