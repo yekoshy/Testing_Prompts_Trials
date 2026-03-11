@@ -103,5 +103,5 @@
     "title": "TC30: Null Byte Injection",
     "input": "abc%00def",
     "expected": "Invalid Value"
-  },
+  }
 ]
